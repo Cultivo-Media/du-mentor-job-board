@@ -26,6 +26,7 @@ export default class MyDocument extends Document {
               -webkit-font-smoothing: antialiased;
               -moz-osx-font-smoothing: grayscale;
               font-family: Inter UI, sans-serif;
+              background-color: #FAFAFA;
             }`}
           </style>
           {this.props.styleTags}

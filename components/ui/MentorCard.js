@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import Box from 'react-box-size';
 
 import { colors } from './variables';
+
+import Button from './Button';
 
 import MentorCardShape from '../../shapes/MentorCard';
 
@@ -28,6 +31,13 @@ const StyledMentorCard = styled.div`
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
   }
+  a {
+    color: ${colors.blue};
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;
 
 const MentorCardTable = styled.div`
@@ -53,6 +63,11 @@ const Grow = styled.div`
   flex-grow: 1;
 `;
 
+// Flex utility
+const Flex = styled.div`
+  display: flex;
+`;
+
 const MentorCard = ({
   mentor: {
     name, expertise, company, title, bio,
@@ -74,6 +89,15 @@ const MentorCard = ({
       </MentorCardTableRow>
     </MentorCardTable>
     <p>{bio}</p>
+    <Box mt={2}>
+      <Flex>
+        <Grow />
+        <Box mr={2}>
+          <Button>Learn More</Button>
+        </Box>
+        <Button active>Apply to Meet</Button>
+      </Flex>
+    </Box>
   </StyledMentorCard>
 );
 

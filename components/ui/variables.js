@@ -4,6 +4,7 @@ export const colors = {
   gray: '#aaa',
   snow: '#eee',
   white: '#fff',
+  blue: '#0D97D4',
 };
 
 export const fontFamily = '"Inter UI", sans-serif';
