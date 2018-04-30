@@ -5,6 +5,7 @@ import Box from 'react-box-size';
 import { colors } from './variables';
 
 import Button from './Button';
+import { Flex, Grow } from './Flex';
 
 import MentorCardShape from '../../shapes/MentorCard';
 
@@ -56,16 +57,6 @@ const MentorCardTableRowSub = styled.div`
 
 const MentorCardTableRowHead = styled.div`
   color: ${colors.black};
-`;
-
-// Flex grow utility
-const Grow = styled.div`
-  flex-grow: 1;
-`;
-
-// Flex utility
-const Flex = styled.div`
-  display: flex;
 `;
 
 const MentorCard = ({

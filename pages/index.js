@@ -3,6 +3,7 @@ import GetSheetDone from 'get-sheet-done';
 import { Container, Row, Col } from 'react-grid-system';
 import Box from 'react-box-size';
 
+import Navbar from '../components/Navbar';
 import MentorCard from '../components/ui/MentorCard';
 
 const documentKey = '1WmIypVMhgUaiwjWtgGXt58eNMtLffWr1xZslRErsGJ0';
@@ -18,22 +19,41 @@ export default class App extends Component {
   }
 
   // Load google sheet data
-  componentWillMount() {
+  componentDidMount() {
     // Get the google sheet
     GetSheetDone.labeledCols(documentKey).then((sheet) => {
       // Add the data to the state
       this.setState({
         data: sheet.data,
+        mentors: sheet.data,
         loading: false,
         loaded: true,
       });
     });
   }
 
+  updateSearch = (event) => {
+    let val = event.target.value;
+    if (val.length < 1) val = null;
+    this.filterMentors('name', val);
+  }
+
+  filterMentors = (prop, val) => {
+    if (!val) {
+      return this.setState(state => ({
+        mentors: state.data,
+      }));
+    }
+    this.setState(state => ({
+      mentors: state.data.filter(d => d[prop].toLowerCase().includes(val.toLowerCase())),
+    }));
+  }
+
   render() {
-    const { loaded, loading, data } = this.state;
+    const { loaded, loading, mentors } = this.state;
     return (
       <div>
+        <Navbar updateSearch={this.updateSearch} />
         {loading && <div>loading...</div>}
         {loaded &&
         <Container>
@@ -43,7 +63,7 @@ export default class App extends Component {
             </Col>
             <Col sm={9}>
               <Row>
-                {data.map(m => (
+                {mentors.map(m => (
                   <Col sm={6}>
                     <Box mb={4}>
                       <MentorCard mentor={m} />
