@@ -5,6 +5,7 @@ import Box from 'react-box-size';
 
 import Navbar from '../components/Navbar';
 import MentorCard from '../components/ui/MentorCard';
+import Header from '../components/Header';
 
 const documentKey = '1WmIypVMhgUaiwjWtgGXt58eNMtLffWr1xZslRErsGJ0';
 
@@ -54,6 +55,10 @@ export default class App extends Component {
     return (
       <div>
         <Navbar updateSearch={this.updateSearch} />
+        <Header
+          title="Find a mentor for you"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at lorem auctor enim elementum tempor."
+        />
         {loading && <div>loading...</div>}
         {loaded &&
         <Container>

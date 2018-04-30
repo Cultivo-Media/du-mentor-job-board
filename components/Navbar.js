@@ -7,7 +7,7 @@ import Link from 'next/link';
 import NavbarShape from '../shapes/Navbar';
 
 import { colors } from './ui/variables';
-import { Grow } from './ui/Flex';
+import { Flex, Grow } from './ui/Flex';
 
 const StyledNavbar = styled.div`
   padding: 40px 0;
@@ -40,7 +40,7 @@ const StyledNavbar = styled.div`
 const Navbar = ({ updateSearch }) => (
   <Container>
     <StyledNavbar>
-      <Row>
+      <Row align="center">
         <Col sm={3}>
           <h4>mentor</h4>
         </Col>
@@ -48,10 +48,14 @@ const Navbar = ({ updateSearch }) => (
           <input placeholder="Search for a mentor" onChange={updateSearch} />
         </Col>
         <Grow />
-        <Box mr={2}>
-          <Link href="/about">About</Link>
-        </Box>
-        <Link href="/apply" dark>Apply to be a mentor</Link>
+        <Col>
+          <Flex>
+            <Box mr={2}>
+              <Link href="/about">About</Link>
+            </Box>
+            <Link href="/apply" dark>Apply to be a mentor</Link>
+          </Flex>
+        </Col>
       </Row>
     </StyledNavbar>
   </Container>
