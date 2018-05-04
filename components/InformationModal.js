@@ -7,7 +7,11 @@ import { Col, Row } from 'react-grid-system';
 import InformationModalShape from '../shapes/InformationModal';
 import { MentorCardTable, MentorCardTableRow, MentorCardTableRowHead, MentorCardTableRowSub } from './ui/CardTable';
 import { Flex, Grow } from './ui/Flex';
+import Button from './ui/Button';
 import { colors } from './ui/variables';
+
+// Configure styles that show for the entire modal
+Modal.defaultStyles.overlay.backgroundColor = 'rgba(0,0,0,.5)';
 
 // Basic styling configuring all of the content in the information modal
 const StyledInformationModal = styled.div`
@@ -24,6 +28,12 @@ const StyledInformationModal = styled.div`
   p {
     color: ${colors.darkGray};
     line-height: 1.5;
+  }
+  hr {
+    background-color: ${colors.snow};
+    border: none;
+    height: 1px;
+    width: 100%;
   }
 `;
 
@@ -60,6 +70,8 @@ const MentorInfo = styled.span`
 const customStyles = {
   content: {
     backgroundColor: colors.white,
+    border: 'none',
+    boxShadow: '0 10px 50px rgba(0,0,0,.1)',
     margin: '0 auto',
     maxWidth: 640,
     width: '90%',
@@ -197,6 +209,14 @@ const InformationModal = ({ informationModalIsOpen, mentor, toggleModal }) => (
             </Box>
           </Col>
         </Row>
+        <Box mt={3} mb={3}>
+          <hr />
+        </Box>
+        <Flex center>
+          <p>You will be redirected to Typeform.</p>
+          <Grow />
+          <Button active>Apply to Meet</Button>
+        </Flex>
       </Box>
     </StyledInformationModal>
   </Modal>
