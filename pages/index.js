@@ -52,6 +52,7 @@ export default class App extends Component {
 
   render() {
     const { loaded, loading, mentors } = this.state;
+    console.log(mentors);
     return (
       <div>
         <Navbar updateSearch={this.updateSearch} />
@@ -68,13 +69,14 @@ export default class App extends Component {
             </Col>
             <Col sm={9}>
               <Row>
-                {mentors.map(m => (
+                {mentors && mentors.length > 0 && mentors.map(m => (
                   <Col sm={6}>
                     <Box mb={4}>
                       <MentorCard mentor={m} />
                     </Box>
                   </Col>
                 ))}
+                {mentors.length === 0 && <p>No mentors found for the supplied search query.</p>}
               </Row>
             </Col>
           </Row>

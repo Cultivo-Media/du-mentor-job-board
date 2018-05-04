@@ -51,9 +51,13 @@ const Navbar = ({ updateSearch }) => (
         <Col>
           <Flex>
             <Box mr={2}>
-              <Link href="/about">About</Link>
+              <Link href="/about">
+                <a>About</a>
+              </Link>
             </Box>
-            <Link href="/apply" dark>Apply to be a mentor</Link>
+            <Link href="/apply">
+              <a>Apply to be a mentor</a>
+            </Link>
           </Flex>
         </Col>
       </Row>

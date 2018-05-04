@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import Box from 'react-box-size';
 
@@ -8,6 +8,9 @@ import Button from './Button';
 import { Flex, Grow } from './Flex';
 
 import MentorCardShape from '../../shapes/MentorCard';
+import InformationModal from '../InformationModal';
+
+import { MentorCardTable, MentorCardTableRow, MentorCardTableRowHead, MentorCardTableRowSub } from './CardTable';
 
 const StyledMentorCard = styled.div`
   background-color: ${colors.white};
@@ -41,57 +44,59 @@ const StyledMentorCard = styled.div`
   }
 `;
 
-const MentorCardTable = styled.div`
-  padding: 16px 0;
-`;
+export default class MentorCard extends Component {
+  static propTypes = MentorCardShape;
 
-const MentorCardTableRow = styled.div`
-  border-bottom: solid 1px ${colors.snow};
-  display: flex;
-  padding: 16px 0;
-`;
+  constructor(props) {
+    super(props);
 
-const MentorCardTableRowSub = styled.div`
-  color: ${colors.gray};
-`;
+    this.state = {
+      informationModalIsOpen: false,
+    };
+  }
 
-const MentorCardTableRowHead = styled.div`
-  color: ${colors.black};
-`;
+  toggleModal = () => {
+    this.setState(state => ({
+      informationModalIsOpen: !state.informationModalIsOpen,
+    }));
+  };
 
-const MentorCard = ({
-  mentor: {
-    name, expertise, company, title, bio,
-  },
-}) => (
-  <StyledMentorCard>
-    <h3>{name}</h3>
-    <span>{expertise}</span>
-    <MentorCardTable>
-      <MentorCardTableRow>
-        <MentorCardTableRowSub>Company</MentorCardTableRowSub>
-        <Grow />
-        <MentorCardTableRowHead>{company}</MentorCardTableRowHead>
-      </MentorCardTableRow>
-      <MentorCardTableRow>
-        <MentorCardTableRowSub>Title</MentorCardTableRowSub>
-        <Grow />
-        <MentorCardTableRowHead>{title}</MentorCardTableRowHead>
-      </MentorCardTableRow>
-    </MentorCardTable>
-    <p>{bio}</p>
-    <Box mt={2}>
-      <Flex>
-        <Grow />
-        <Box mr={2}>
-          <Button>Learn More</Button>
-        </Box>
-        <Button active>Apply to Meet</Button>
-      </Flex>
-    </Box>
-  </StyledMentorCard>
-);
-
-MentorCard.propTypes = MentorCardShape;
-
-export default MentorCard;
+  render() {
+    const { mentor } = this.props;
+    return (
+      <div>
+        {mentor && <InformationModal
+          informationModalIsOpen={this.state.informationModalIsOpen}
+          toggleModal={this.toggleModal}
+          mentor={mentor}
+        />}
+        <StyledMentorCard>
+          <h3>{mentor.name}</h3>
+          <span>{mentor.expertise}</span>
+          <MentorCardTable>
+            <MentorCardTableRow>
+              <MentorCardTableRowSub>Company</MentorCardTableRowSub>
+              <Grow />
+              <MentorCardTableRowHead>{mentor.company}</MentorCardTableRowHead>
+            </MentorCardTableRow>
+            <MentorCardTableRow>
+              <MentorCardTableRowSub>Title</MentorCardTableRowSub>
+              <Grow />
+              <MentorCardTableRowHead>{mentor.title}</MentorCardTableRowHead>
+            </MentorCardTableRow>
+          </MentorCardTable>
+          <p>{mentor.bio}</p>
+          <Box mt={2}>
+            <Flex>
+              <Grow />
+              <Box mr={2}>
+                <Button onClick={this.toggleModal}>Learn More</Button>
+              </Box>
+              <Button active onClick={this.toggleModal}>Apply to Meet</Button>
+            </Flex>
+          </Box>
+        </StyledMentorCard>
+      </div>
+    );
+  }
+}

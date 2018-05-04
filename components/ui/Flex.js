@@ -8,4 +8,5 @@ export const Grow = styled.div`
 // Flex utility
 export const Flex = styled.div`
   display: flex;
+  align-items: ${props => props.center ? 'center' : 'flex-start'};
 `;

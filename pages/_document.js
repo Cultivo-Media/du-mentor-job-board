@@ -32,6 +32,7 @@ export default class MyDocument extends Document {
           {this.props.styleTags}
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link href="https://rsms.me/inter/inter-ui.css" rel="stylesheet" />
+          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous" />
         </Head>
         <body>
           <Main />
