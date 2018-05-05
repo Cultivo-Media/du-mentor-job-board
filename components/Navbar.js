@@ -1,5 +1,4 @@
 import React from 'react';
-import Box from 'react-box-size';
 import styled from 'styled-components';
 import { Container, Row, Col } from 'react-grid-system';
 import Link from 'next/link';
@@ -51,7 +50,7 @@ const Navbar = ({ updateSearch }) => (
         <Col>
           <Flex>
             <Link href="/about">
-              <a>About</a>
+              <a href="/about">About</a>
             </Link>
             <Grow />
             <Link href="/apply">

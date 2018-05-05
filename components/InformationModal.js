@@ -38,7 +38,7 @@ const StyledInformationModal = styled.div`
 `;
 
 // Section header that defines content
-const SectionHeader = styled.h5`
+export const SectionHeader = styled.h5`
   color: ${colors.gray};
   font-size: 12px;
   font-weight: bold;

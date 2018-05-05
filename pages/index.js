@@ -6,6 +6,7 @@ import Box from 'react-box-size';
 import Navbar from '../components/Navbar';
 import MentorCard from '../components/ui/MentorCard';
 import Header from '../components/Header';
+import { SectionHeader } from '../components/InformationModal';
 
 const documentKey = '1WmIypVMhgUaiwjWtgGXt58eNMtLffWr1xZslRErsGJ0';
 
@@ -24,8 +25,14 @@ export default class App extends Component {
     // Get the google sheet
     GetSheetDone.labeledCols(documentKey).then((sheet) => {
       // Add the data to the state
+      const arrayOfExpertise = sheet.data.map(d => d.expertise.split(','));
+      const flattenedArray = [].concat.apply([], arrayOfExpertise)
+        .map(item => item.trim())
+        .map(item => typeof item === 'string' ? item.toLowerCase() : item);
+      const filteredExpertise = Array.from(new Set(flattenedArray));
       this.setState({
         data: sheet.data,
+        expertiseFields: filteredExpertise,
         mentors: sheet.data,
         loading: false,
         loaded: true,
@@ -37,7 +44,7 @@ export default class App extends Component {
     let val = event.target.value;
     if (val.length < 1) val = null;
     this.filterMentors('name', val);
-  }
+  };
 
   filterMentors = (prop, val) => {
     if (!val) {
@@ -45,14 +52,27 @@ export default class App extends Component {
         mentors: state.data,
       }));
     }
-    this.setState(state => ({
+    return this.setState(state => ({
       mentors: state.data.filter(d => d[prop].toLowerCase().includes(val.toLowerCase())),
     }));
-  }
+  };
+
+  // Allows the user to select expertise in which they are interested in
+  selectExpertise = (expertise) => {
+    this.setState({
+      selectedExpertise: expertise,
+    });
+    this.filterMentors('expertise', expertise);
+  };
 
   render() {
-    const { loaded, loading, mentors } = this.state;
-    console.log(mentors);
+    const {
+      loaded,
+      loading,
+      mentors,
+      expertiseFields,
+      selectedExpertise,
+    } = this.state;
     return (
       <div>
         <Navbar updateSearch={this.updateSearch} />
@@ -65,7 +85,21 @@ export default class App extends Component {
         <Container>
           <Row>
             <Col sm={3}>
-              filter data
+              <Box mb={2}>
+                <SectionHeader>Expertise</SectionHeader>
+              </Box>
+              {expertiseFields && expertiseFields.map(e => (
+                <Box mb={2}>
+                  <span
+                    onClick={() => this.selectExpertise(e)}
+                    style={{
+                      cusor: 'pointer',
+                      fontWeight: selectedExpertise === e ? '700' : '400',
+                    }}
+                  >{e}
+                  </span>
+                </Box>
+              ))}
             </Col>
             <Col sm={9}>
               <Row>
