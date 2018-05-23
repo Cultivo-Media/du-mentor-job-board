@@ -36,16 +36,17 @@ const StyledNavbar = styled.div`
   }
 `;
 
-const Navbar = ({ updateSearch }) => (
+const Navbar = ({ updateSearch, isOnAboutPage }) => (
   <Container>
     <StyledNavbar>
       <Row align="center">
         <Col sm={3}>
           <h4>mentor</h4>
         </Col>
+        {!isOnAboutPage &&
         <Col sm={3}>
           <input placeholder="Search for a mentor" onChange={updateSearch} />
-        </Col>
+        </Col>}
         <Grow />
         <Col>
           <Flex>
