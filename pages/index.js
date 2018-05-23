@@ -17,6 +17,7 @@ export default class App extends Component {
     this.state = {
       loading: true,
       loaded: false,
+      selectedExpertise: [],
     };
   }
 
@@ -52,17 +53,30 @@ export default class App extends Component {
         mentors: state.data,
       }));
     }
-    return this.setState(state => ({
-      mentors: state.data.filter(d => d[prop].toLowerCase().includes(val.toLowerCase())),
-    }));
+    // If we are selecting multiple sets of expertise, we need to include all of them
+    let mentors;
+    if (Array.isArray(val)) {
+      mentors = this.state.mentors.filter((m) => {
+        const expertise = m.expertise
+          .split(',').map(e => e.trim());
+        let inside = false;
+        return val.every(e => expertise.includes(e));
+      });
+    } else {
+      mentors = this.state.data.filter(d => d[prop].toLowerCase().includes(val.toLowerCase()));
+    }
+    return this.setState({
+      mentors,
+    });
   };
 
   // Allows the user to select expertise in which they are interested in
   selectExpertise = (expertise) => {
-    this.setState({
-      selectedExpertise: expertise,
-    });
-    this.filterMentors('expertise', expertise);
+    const selectedExpertise = [...this.state.selectedExpertise, expertise];
+    this.setState(state => ({
+      selectedExpertise,
+    }));
+    this.filterMentors('expertise', selectedExpertise);
   };
 
   render() {
@@ -94,7 +108,7 @@ export default class App extends Component {
                     onClick={() => this.selectExpertise(e)}
                     style={{
                       cusor: 'pointer',
-                      fontWeight: selectedExpertise === e ? '700' : '400',
+                      fontWeight: selectedExpertise.includes(e) ? '700' : '400',
                     }}
                   >{e}
                   </span>
