@@ -56,10 +56,9 @@ export default class App extends Component {
     // If we are selecting multiple sets of expertise, we need to include all of them
     let mentors;
     if (Array.isArray(val)) {
-      mentors = this.state.mentors.filter((m) => {
+      mentors = this.state.data.filter((m) => {
         const expertise = m.expertise
           .split(',').map(e => e.trim());
-        let inside = false;
         return val.every(e => expertise.includes(e));
       });
     } else {
@@ -72,10 +71,15 @@ export default class App extends Component {
 
   // Allows the user to select expertise in which they are interested in
   selectExpertise = (expertise) => {
-    const selectedExpertise = [...this.state.selectedExpertise, expertise];
-    this.setState(state => ({
+    let selectedExpertise;
+    if (this.state.selectedExpertise.includes(expertise)) {
+      selectedExpertise = this.state.selectedExpertise.filter(s => s !== expertise);
+    } else {
+      selectedExpertise = [...this.state.selectedExpertise, expertise];
+    }
+    this.setState({
       selectedExpertise,
-    }));
+    });
     this.filterMentors('expertise', selectedExpertise);
   };
 
@@ -107,7 +111,7 @@ export default class App extends Component {
                   <span
                     onClick={() => this.selectExpertise(e)}
                     style={{
-                      cusor: 'pointer',
+                      cursor: 'pointer',
                       fontWeight: selectedExpertise.includes(e) ? '700' : '400',
                     }}
                   >{e}
