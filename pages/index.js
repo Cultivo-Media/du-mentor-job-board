@@ -27,10 +27,14 @@ export default class App extends Component {
     GetSheetDone.labeledCols(documentKey).then((sheet) => {
       // Add the data to the state
       const arrayOfExpertise = sheet.data.map(d => d.expertise.split(','));
+      // We need to find all unique elements of expertise
+      // This allow us to filter through the array later
       const flattenedArray = [].concat.apply([], arrayOfExpertise)
         .map(item => item.trim())
         .map(item => typeof item === 'string' ? item.toLowerCase() : item);
-      const filteredExpertise = Array.from(new Set(flattenedArray));
+      // Flatten the array again, then sort it
+      // Sorting the array allows us to show the elements in alphabetical order
+      const filteredExpertise = Array.from(new Set(flattenedArray)).sort();
       this.setState({
         data: sheet.data,
         expertiseFields: filteredExpertise,
@@ -98,7 +102,7 @@ export default class App extends Component {
           title="Find a mentor for you"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at lorem auctor enim elementum tempor."
         />
-        {loading && <div>loading...</div>}
+        {loading && <Container>Loading...</Container>}
         {loaded &&
         <Container>
           <Row>
@@ -113,6 +117,7 @@ export default class App extends Component {
                     style={{
                       cursor: 'pointer',
                       fontWeight: selectedExpertise.includes(e) ? '700' : '400',
+                      textTransform: 'capitalize',
                     }}
                   >{e}
                   </span>

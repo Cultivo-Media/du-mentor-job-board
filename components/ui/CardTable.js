@@ -19,4 +19,5 @@ export const MentorCardTableRowSub = styled.div`
 
 export const MentorCardTableRowHead = styled.div`
   color: ${colors.black};
+  text-align: right;
 `;
