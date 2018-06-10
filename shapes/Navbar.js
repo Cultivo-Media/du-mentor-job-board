@@ -2,7 +2,7 @@ import { func, bool } from 'prop-types';
 
 const NavbarShape = {
   updateSearch: func,
-  isOnAboutPage: bool,
+  shouldShowSearchField: bool,
 };
 
 export default NavbarShape;

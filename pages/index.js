@@ -29,7 +29,7 @@ export default class App extends Component {
       const arrayOfExpertise = sheet.data.map(d => d.expertise.split(','));
       // We need to find all unique elements of expertise
       // This allow us to filter through the array later
-      const flattenedArray = [].concat.apply([], arrayOfExpertise)
+      const flattenedArray = [].concat(...arrayOfExpertise)
         .map(item => item.trim())
         .map(item => typeof item === 'string' ? item.toLowerCase() : item);
       // Flatten the array again, then sort it
@@ -45,13 +45,16 @@ export default class App extends Component {
     });
   }
 
+  // When we filter the mentors, we pull the value from the event's target element
   updateSearch = (event) => {
     let val = event.target.value;
     if (val.length < 1) val = null;
     this.filterMentors('name', val);
   };
 
+  // A helper function used to filter through members
   filterMentors = (prop, val) => {
+    // If no value was passed for filtering, we want to completely reset the mentors that are filtered
     if (!val) {
       return this.setState(state => ({
         mentors: state.data,
@@ -59,15 +62,19 @@ export default class App extends Component {
     }
     // If we are selecting multiple sets of expertise, we need to include all of them
     let mentors;
+    // If we are filtering expertise (the only time we are filtering an array), we need to handle it carefully
     if (Array.isArray(val)) {
+      // Filter through mentors and split their expertise strings into an array
       mentors = this.state.data.filter((m) => {
         const expertise = m.expertise
           .split(',').map(e => e.trim());
         return val.every(e => expertise.includes(e));
       });
     } else {
+      // Otherwise, we can just filter and ensure that the property includes itsefl
       mentors = this.state.data.filter(d => d[prop].toLowerCase().includes(val.toLowerCase()));
     }
+    // Return with a new array of the setState data
     return this.setState({
       mentors,
     });
@@ -76,14 +83,17 @@ export default class App extends Component {
   // Allows the user to select expertise in which they are interested in
   selectExpertise = (expertise) => {
     let selectedExpertise;
+    // If the expertise already exists, we want to remove it
     if (this.state.selectedExpertise.includes(expertise)) {
       selectedExpertise = this.state.selectedExpertise.filter(s => s !== expertise);
     } else {
+      // Otherwise we want to add the new expertise into the array
       selectedExpertise = [...this.state.selectedExpertise, expertise];
     }
     this.setState({
       selectedExpertise,
     });
+    // Filter through the mentors as we select the new expertise
     this.filterMentors('expertise', selectedExpertise);
   };
 
@@ -97,7 +107,7 @@ export default class App extends Component {
     } = this.state;
     return (
       <div>
-        <Navbar updateSearch={this.updateSearch} />
+        <Navbar updateSearch={this.updateSearch} shouldShowSearchField />
         <Header
           title="Find a mentor for you"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at lorem auctor enim elementum tempor."

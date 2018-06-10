@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes  from 'prop-types';
 import Modal from 'react-modal';
 import styled from 'styled-components';
 import Box from 'react-box-size';
@@ -81,6 +82,8 @@ const customStyles = {
 /**
  * MappedCheckbox
  *
+ * component
+ *
  * Quickly allows a property to be mapped to a circular checkbox with the content filled or not
  *
  * @param property
@@ -91,6 +94,23 @@ const MappedCheckbox = ({ property }) => (
   </StyledCheckbox>
 );
 
+MappedCheckbox.propTypes = {
+  property: PropTypes.string.isRequired,
+};
+
+/**
+ * InformationModal
+ *
+ * component
+ *
+ * A modal that displays when the user requests to see more information about a mentor.
+ *
+ * @param {boolean} informationModalIsOpen - A boolean that determines if the modal is open
+ * @param {object} mentor - An object that is then used and rendered inside.
+ * @param {function} toggleModal - Toggle the modal to be open/closed.
+ *
+ * @constructor
+ */
 const InformationModal = ({ informationModalIsOpen, mentor, toggleModal }) => (
   <Modal
     isOpen={informationModalIsOpen}

@@ -5,7 +5,7 @@ import Header from '../components/Header';
 
 export default () => (
   <div>
-    <Navbar isOnAboutPage />
+    <Navbar />
     <Header
       title="About"
       description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at lorem auctor enim elementum tempor."
