@@ -15,6 +15,9 @@ const StyledNavbar = styled.div`
     font-size: 20px;
     font-weight: bold;
   }
+  img {
+    width: 40px;
+  }
   input {
     background-color: ${colors.snow};
     border: none;
@@ -53,7 +56,11 @@ const Navbar = ({ updateSearch, shouldShowSearchField }) => (
     <StyledNavbar>
       <Row align="center">
         <Col sm={3}>
-          <h4>mentor</h4>
+          <Flex center>
+            <img src="/static/logo.png" alt="project x-ite logo" />
+            &nbsp;&nbsp;
+            <h4>mentor</h4>
+          </Flex>
         </Col>
         {shouldShowSearchField &&
         <Col sm={3}>

@@ -71,8 +71,8 @@ export default class App extends Component {
         return val.every(e => expertise.includes(e));
       });
     } else {
-      // Otherwise, we can just filter and ensure that the property includes itsefl
-      mentors = this.state.data.filter(d => d[prop].toLowerCase().includes(val.toLowerCase()));
+      // Otherwise, we can just filter and ensure that the property includes itself
+      mentors = this.state.data.filter(d => ['name', 'company'].some(a => d[a].toLowerCase().includes(val.toLowerCase())));
     }
     // Return with a new array of the setState data
     return this.setState({
