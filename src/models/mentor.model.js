@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { connection } = require('../config/db.config');
 
 /**
  * schema (mentorSchema)
@@ -105,7 +104,7 @@ const schema = new mongoose.Schema({
 });
 
 // Create a new model using the configured schema
-const model = connection.model('Mentor', schema);
+const model = mongoose.model('Mentor', schema);
 
 module.exports = {
   schema,
