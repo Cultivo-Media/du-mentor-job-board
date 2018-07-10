@@ -1,10 +1,5 @@
-const getSheetDone = require('get-sheet-done');
-
+const { fetchAndParseDefaultGoogleSheet } = require('../util/googleSheet.util');
 const MentorModel = require('../models/mentor.model').model;
-
-// We must have a googleSheetDocumentKey in order to successfully fetch data from the google sheet
-if (typeof process.env.googleSheetDocumentKey !== 'string') throw new Error('googleSheetDocumentKey is required in environment');
-const { googleSheetDocumentKey } = process.env;
 
 /**
  * parseSheetResponse()
@@ -16,24 +11,26 @@ const { googleSheetDocumentKey } = process.env;
  *
  * @param {object} googleSheet - A google sheet object we are going to save.
  */
-const parseSheetResponse = googleSheet => googleSheet.data.map((row) => {
+const parseSheetResponse = googleSheet => googleSheet.map((row) => {
   // The expertise just need to be split into an array
   const expertise = row.expertise.split(',');
+
+  console.log(row);
 
   // These are all the different types of characteristics we can have
   const typesOfCharacteristics = ['alumni', 'staff', 'faculty', 'parent', 'donor', 'communityMember'];
   // Filter the characteristics to those that are included (using a "X")
-  const characteristics = typesOfCharacteristics.filter(c => row[c].includes('X'));
+  const characteristics = typesOfCharacteristics.filter(c => row[c.toLowerCase()] && row[c.toLowerCase()].includes('X'));
 
   // These are all the different types of meeting types we can have
   const typesOfMeetingTypes = ['periodicMeeting', 'dedicatedMentoring', 'oneTimeMeeting', 'eventMeeting'];
   // Filter the meeting types to those that are included (using a "X")
-  const meetingTypes = typesOfMeetingTypes.filter(c => row[c].includes('X'));
+  const meetingTypes = typesOfMeetingTypes.filter(c => row[c.toLowerCase()] && row[c.toLowerCase()].includes('X'));
 
   // These are all the different types of availability we can have
   const typesOfAvailability = ['earlyMorning', 'lateMorning', 'earlyAfternoon', 'lateAfternoon', 'evening'];
   // Filter the availability to those that are included (using a "X")
-  const availability = typesOfAvailability.filter(c => row[c].includes('X'));
+  const availability = typesOfAvailability.filter(c => row[c.toLowerCase()] && row[c.toLowerCase()].includes('X'));
 
   return {
     ...row,
@@ -55,7 +52,7 @@ const parseSheetResponse = googleSheet => googleSheet.data.map((row) => {
  *  3. Saves only new mentors and updates any previous mentors.
  */
 const cacheMentorsTask = async () => {
-  const sheet = await getSheetDone.labeledCols(googleSheetDocumentKey);
+  const sheet = await fetchAndParseDefaultGoogleSheet();
 
   // Parse the data from the sheet response from google sheets
   const parsedSheet = parseSheetResponse(sheet);
@@ -64,10 +61,9 @@ const cacheMentorsTask = async () => {
   await MentorModel.remove().exec();
 
   // Create all the new mentors from the parsed sheet
-  await MentorModel.create(parsedSheet).exec();
+  await MentorModel.create(parsedSheet);
 
   console.info('Created new mentors');
-  return Promise.resolve();
 };
 
 module.exports = cacheMentorsTask;
