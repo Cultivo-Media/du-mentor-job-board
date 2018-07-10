@@ -18,6 +18,7 @@ const schema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    default: '',
   },
 
   /**
@@ -30,6 +31,7 @@ const schema = new mongoose.Schema({
   company: {
     type: String,
     required: true,
+    default: '',
   },
 
   /**
@@ -42,6 +44,7 @@ const schema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
+    default: '',
   },
 
   /**
@@ -54,6 +57,7 @@ const schema = new mongoose.Schema({
   bio: {
     type: String,
     required: true,
+    default: '',
   },
 
   /**

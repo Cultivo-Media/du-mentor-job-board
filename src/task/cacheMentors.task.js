@@ -15,8 +15,6 @@ const parseSheetResponse = googleSheet => googleSheet.map((row) => {
   // The expertise just need to be split into an array
   const expertise = row.expertise.split(',');
 
-  console.log(row);
-
   // These are all the different types of characteristics we can have
   const typesOfCharacteristics = ['alumni', 'staff', 'faculty', 'parent', 'donor', 'communityMember'];
   // Filter the characteristics to those that are included (using a "X")
@@ -33,7 +31,16 @@ const parseSheetResponse = googleSheet => googleSheet.map((row) => {
   const availability = typesOfAvailability.filter(c => row[c.toLowerCase()] && row[c.toLowerCase()].includes('X'));
 
   return {
+    // Extend the default row
     ...row,
+    // Set a name if it doesn't exist
+    name: row.name || '',
+    // Set a company if it doesn't exist
+    company: row.company || '',
+    // Set a title if it doesn't exist
+    title: row.title || '',
+    // Set a bio if it doesn't exist
+    bio: row.bio || '',
     expertise,
     characteristics,
     meetingTypes,
