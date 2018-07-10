@@ -2,6 +2,7 @@
 require('dotenv').config();
 // Default imports
 const express = require('express');
+const schedule = require('node-schedule');
 
 const DEFAULT_PORT = process.env.PORT || 4003;
 
@@ -15,16 +16,18 @@ const app = express();
 // Configure routes
 app.use('/mentors', require('./routes/mentor.route'));
 
-// Create a startup function that handles caching the mentors
-const startup = async () => {
+// Create a runTasks function that handles caching the mentors (the only task we have)
+const runTasks = async () => {
   await cacheMentorsTask();
 
-  console.info('Finished running tasks');
+  console.info('Finished running tasks.');
 };
 
 app.listen(DEFAULT_PORT, () => {
-  console.info(`Application running on port ${DEFAULT_PORT}`);
+  console.info(`Application running on port ${DEFAULT_PORT}.`);
 });
 
-// Start the migration task
-startup();
+// Schedule the job to run that the top of the hour, every hour
+schedule.scheduleJob('0 * * * *', () => {
+  runTasks();
+});
