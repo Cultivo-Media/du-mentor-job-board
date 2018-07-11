@@ -13,6 +13,10 @@ const { cacheMentorsTask } = require('./task');
 require('./config/db.config');
 
 const app = express();
+
+// Auth configuration (this allows us to have auth context on each request)
+app.use(require('./config/auth.config').attachAuthContextMiddleware);
+
 // Configure routes
 app.use('/mentors', require('./routes/mentor.route'));
 

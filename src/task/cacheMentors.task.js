@@ -1,5 +1,5 @@
 const { fetchAndParseDefaultGoogleSheet } = require('../util/googleSheet.util');
-const MentorModel = require('../models/mentor.model').model;
+const { MentorModel } = require('../models/mentor.model');
 
 /**
  * parseSheetResponse()

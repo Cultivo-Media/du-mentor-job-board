@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
 /**
- * schema (mentorSchema)
+ * MentorSchema
  *
  * mongoose schema
  *
  * The configuration for a schema that models what a mentor looks like.
  */
-const schema = new mongoose.Schema({
+const MentorSchema = new mongoose.Schema({
   /**
    * name
    *
@@ -108,9 +108,9 @@ const schema = new mongoose.Schema({
 });
 
 // Create a new model using the configured schema
-const model = mongoose.model('Mentor', schema);
+const MentorModel = mongoose.model('Mentor', MentorSchema);
 
 module.exports = {
-  schema,
-  model,
+  MentorSchema,
+  MentorModel,
 };
