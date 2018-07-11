@@ -1,5 +1,5 @@
-const { fetchAndParseDefaultGoogleSheet } = require('../util/googleSheet.util');
-const { MentorModel } = require('../models/mentor.model');
+import { fetchAndParseDefaultGoogleSheet } from '../util/googleSheet.util';
+import { MentorModel } from '../models/mentor.model';
 
 /**
  * parseSheetResponse()
@@ -73,4 +73,4 @@ const cacheMentorsTask = async () => {
   console.info('Created new mentors');
 };
 
-module.exports = cacheMentorsTask;
+export default cacheMentorsTask;

@@ -1,7 +1,7 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-const { UserModel } = require('../models/user.model');
+import { UserModel } from '../models/user.model';
 
 /**
  * SALT_ROUNDS
@@ -41,7 +41,7 @@ const TOKEN_COOKIE_NAME = 'mentorJobBoardToken';
  *
  * @returns {string} A hashed password.
  */
-const hashPassword = async password => bcrypt.hash(password, SALT_ROUNDS);
+const hashPassword = async (password:string):Promise<string> => bcrypt.hash(password, SALT_ROUNDS);
 
 /**
  * comparePassword()
@@ -55,7 +55,7 @@ const hashPassword = async password => bcrypt.hash(password, SALT_ROUNDS);
  *
  * @returns {boolean} A boolean of whether the password matches.
  */
-const comparePassword = async (password, hashedPassword) => bcrypt.compare(password, hashedPassword);
+const comparePassword = async (password:string, hashedPassword:string):Promise<boolean> => bcrypt.compare(password, hashedPassword);
 
 /**
  * generateJwtForBody()
@@ -65,8 +65,10 @@ const comparePassword = async (password, hashedPassword) => bcrypt.compare(passw
  * Generates a JWT for a body using a KEY.
  *
  * @param {object} body - A body to generate a JWT for.
+ *
+ * @param {string} - A response string of the JWT.
  */
-const generateJwtForBody = async body => jwt.sign(body, KEY);
+const generateJwtForBody = async (body:object):Promise<string> => jwt.sign(body, KEY);
 
 /**
  * generateJwtForUser()
@@ -78,13 +80,7 @@ const generateJwtForBody = async body => jwt.sign(body, KEY);
  *
  * @param {string} userId - A userId we use to generate a user for.
  */
-const generateJwtForUser = async (userId) => {
-  if (typeof userId !== 'string') {
-    throw new Error('param userId for generateJwtForUser must be a string');
-  }
-
-  return generateJwtForBody({ user: userId });
-};
+const generateJwtForUser = async (userId: string):Promise<string> => generateJwtForBody({ user: userId });
 
 /**
  * decodeToken()
@@ -95,18 +91,13 @@ const generateJwtForUser = async (userId) => {
  *
  * @param {string} token - A token we use to decode inside the function.
  */
-const decodeToken = async (token) => {
+const decodeToken = async (token:string):Promise<object> => {
   if (typeof token !== 'string') throw new Error('decodetoken requires a string token to decode');
   const decoded = await jwt.verify(token, KEY);
 
   const user = await UserModel.findOne({ _id: decoded.user }).exec();
 
-  if (!user) {
-    throw new Error({
-      message: 'No user exists for the decoded id',
-      status: 401,
-    });
-  }
+  if (!user) throw new Error('No user exists for the decoded id');
 
   return {
     userId: user._id //eslint-disable-line
@@ -126,7 +117,7 @@ const decodeToken = async (token) => {
  *
  * @returns {Function} Express middleware that uses that async authorizor to check authentication.
  */
-const createAsyncAuthMiddleware = async asyncAuthorizor => async (req, res, next) => {
+const createAsyncAuthMiddleware = async (asyncAuthorizor:Function) => async (req: Request, res:Response, next:Function) => {
   if (!req.authContext) {
     return res.status(401).send({
       message: 'Sorry, you must be logged in to perform that action.',
@@ -168,7 +159,7 @@ const createAsyncAuthMiddleware = async asyncAuthorizor => async (req, res, next
  * @param {Object} res - express response object
  * @param {Function} next - express next middleware function
  */
-const attachAuthContextMiddleware = async (req, res, next) => {
+const attachAuthContextMiddleware = async (req: Request, res: Response, next: Function) => {
   if (!req.cookies) throw new Error('AuthMiddleware: missing req.cookies object');
 
   // Get the token from the cookie store
@@ -210,7 +201,7 @@ const attachAuthContextMiddleware = async (req, res, next) => {
  *
  * @returns {boolean} Whether or not the authentication passed.
  */
-const hasMentorAccess = (idSource = 'params', idName = '_id') => createAsyncAuthMiddleware(async (req) => {
+const hasMentorAccess = (idSource:string = 'params', idName:string = '_id') => createAsyncAuthMiddleware(async (req) => {
   // Find a user that has the same ID as the one in the authContext
   const currentUser = await UserModel.findOne({ _id: req.authContext.userId }).select('mentor').exec();
 
@@ -221,7 +212,7 @@ const hasMentorAccess = (idSource = 'params', idName = '_id') => createAsyncAuth
   return false;
 });
 
-module.exports = {
+export {
   hashPassword,
   comparePassword,
   generateJwtForUser,

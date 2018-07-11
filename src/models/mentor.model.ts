@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 /**
  * MentorSchema
@@ -110,7 +110,7 @@ const MentorSchema = new mongoose.Schema({
 // Create a new model using the configured schema
 const MentorModel = mongoose.model('Mentor', MentorSchema);
 
-module.exports = {
+export {
   MentorSchema,
   MentorModel,
 };
