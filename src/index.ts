@@ -17,14 +17,14 @@ import './config/db.config';
 
 const app = Express();
 
-// Auth configuration (this allows us to have auth context on each request)
-import { attachAuthContextMiddleware } from './config/auth.config';
-app.use(attachAuthContextMiddleware);
-
 // Attach body parser and cookie parser
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// Auth configuration (this allows us to have auth context on each request)
+import { attachAuthContextMiddleware } from './config/auth.config';
+app.use(attachAuthContextMiddleware);
 
 // Configure routes
 import mentorRoute from './routes/mentor.route';
