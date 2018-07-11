@@ -117,7 +117,7 @@ const decodeToken = async (token:string):Promise<object> => {
  *
  * @returns {Function} Express middleware that uses that async authorizor to check authentication.
  */
-const createAsyncAuthMiddleware = async (asyncAuthorizor:Function) => async (req: Request, res:Response, next:Function) => {
+const createAsyncAuthMiddleware = async (asyncAuthorizor:Function) => async (req, res, next:Function) => {
   if (!req.authContext) {
     return res.status(401).send({
       message: 'Sorry, you must be logged in to perform that action.',
@@ -159,7 +159,7 @@ const createAsyncAuthMiddleware = async (asyncAuthorizor:Function) => async (req
  * @param {Object} res - express response object
  * @param {Function} next - express next middleware function
  */
-const attachAuthContextMiddleware = async (req: Request, res: Response, next: Function) => {
+const attachAuthContextMiddleware = async (req, res, next: Function) => {
   if (!req.cookies) throw new Error('AuthMiddleware: missing req.cookies object');
 
   // Get the token from the cookie store
