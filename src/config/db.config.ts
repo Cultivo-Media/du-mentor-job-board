@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import * as mongoose from 'mongoose';
 
 // Set the DB_NAME (the db we will connect to)
 const DB_NAME = 'du-mentor-job-board';

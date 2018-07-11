@@ -1,9 +1,11 @@
 // Configure data from the config
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 dotenv.config();
 // Default imports
-import Express from 'express';
-import schedule from 'node-schedule';
+import * as Express from 'express';
+import * as schedule from 'node-schedule';
+import * as cookieParser from 'cookie-parser';
+import * as bodyParser from 'body-parser';
 
 const DEFAULT_PORT = process.env.PORT || 4003;
 
@@ -18,6 +20,11 @@ const app = Express();
 // Auth configuration (this allows us to have auth context on each request)
 import { attachAuthContextMiddleware } from './config/auth.config';
 app.use(attachAuthContextMiddleware);
+
+// Attach body parser and cookie parser
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 // Configure routes
 import mentorRoute from './routes/mentor.route';
