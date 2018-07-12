@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 // We must have a googleSheetDocumentKey in order to successfully fetch data from the google sheet
 if (typeof process.env.googleSheetDocumentKey !== 'string') throw new Error('googleSheetDocumentKey is required in environment');
@@ -79,6 +79,6 @@ const fetchAndParseGoogleSheet = async (id) => {
  */
 const fetchAndParseDefaultGoogleSheet = () => fetchAndParseGoogleSheet(googleSheetDocumentKey);
 
-module.exports = {
-  fetchAndParseDefaultGoogleSheet,
+export {
+  fetchAndParseDefaultGoogleSheet
 };
