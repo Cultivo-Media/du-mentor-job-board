@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/henrykaufman/.nvm/versions/node/v8.11.3/bin/node /usr/local/Cellar/yarn/1.7.0/libexec/bin/yarn.js add typescript
+  /Users/henrykaufman/.nvm/versions/node/v8.11.3/bin/node /usr/local/Cellar/yarn/1.7.0/libexec/bin/yarn.js add --dev typescript
 
 PATH: 
   /Users/henrykaufman/.rvm/gems/ruby-2.4.1/bin:/Users/henrykaufman/.rvm/gems/ruby-2.4.1@global/bin:/Users/henrykaufman/.rvm/rubies/ruby-2.4.1/bin:/Users/henrykaufman/.nvm/versions/node/v8.11.3/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/henrykaufman/.rvm/bin
@@ -14,17 +14,17 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: connect ENETUNREACH 104.18.97.96:443 - Local (0.0.0.0:64440)
-      at Object._errnoException (util.js:992:11)
-      at _exceptionWithHostPort (util.js:1014:20)
-      at internalConnect (net.js:960:16)
-      at defaultTriggerAsyncIdScope (internal/async_hooks.js:284:19)
-      at emitLookup (net.js:1106:9)
-      at /usr/local/Cellar/yarn/1.7.0/libexec/lib/cli.js:103250:28
-      at /usr/local/Cellar/yarn/1.7.0/libexec/lib/cli.js:103159:13
-      at RawTask.module.exports.RawTask.call (/usr/local/Cellar/yarn/1.7.0/libexec/lib/cli.js:83658:19)
-      at flush (/usr/local/Cellar/yarn/1.7.0/libexec/lib/cli.js:83740:29)
-      at _combinedTickCallback (internal/process/next_tick.js:131:7)
+  Error: https://registry.yarnpkg.com/typescript: ESOCKETTIMEDOUT
+      at ClientRequest.<anonymous> (/usr/local/Cellar/yarn/1.7.0/libexec/lib/cli.js:135306:19)
+      at Object.onceWrapper (events.js:313:30)
+      at emitNone (events.js:106:13)
+      at ClientRequest.emit (events.js:208:7)
+      at TLSSocket.emitTimeout (_http_client.js:706:34)
+      at Object.onceWrapper (events.js:313:30)
+      at emitNone (events.js:106:13)
+      at TLSSocket.emit (events.js:208:7)
+      at TLSSocket.Socket._onTimeout (net.js:410:8)
+      at ontimeout (timers.js:498:11)
 
 npm manifest: 
   {

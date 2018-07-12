@@ -20,21 +20,30 @@ const parseSheetResponse = googleSheet => googleSheet.map((row) => {
   // Filter the characteristics to those that are included (using a "X")
   const characteristics = typesOfCharacteristics
     .filter(c => row[c.toLowerCase()] && row[c.toLowerCase()].includes('X'))
-    .map(c => c.trim());
+    // Trim any excess characters
+    .map(c => c.trim())
+    // Ensure that we do not have any empty strings
+    .filter(String);
 
   // These are all the different types of meeting types we can have
   const typesOfMeetingTypes = ['periodicMeeting', 'dedicatedMentoring', 'oneTimeMeeting', 'eventMeeting'];
   // Filter the meeting types to those that are included (using a "X")
   const meetingTypes = typesOfMeetingTypes
     .filter(c => row[c.toLowerCase()] && row[c.toLowerCase()].includes('X'))
-    .map(c => c.trim());
+    // Trim any excess characters
+    .map(c => c.trim())
+    // Ensure that we do not have any empty strings
+    .filter(String);
 
   // These are all the different types of availability we can have
   const typesOfAvailability = ['earlyMorning', 'lateMorning', 'earlyAfternoon', 'lateAfternoon', 'evening'];
   // Filter the availability to those that are included (using a "X")
   const availability = typesOfAvailability
     .filter(c => row[c.toLowerCase()] && row[c.toLowerCase()].includes('X'))
-    .map(c => c.trim());
+    // Trim any excess characters
+    .map(c => c.trim())
+    // Ensure that we do not have any empty strings
+    .filter(String);
 
   return {
     // Extend the default row
