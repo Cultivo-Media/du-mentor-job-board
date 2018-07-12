@@ -42,7 +42,9 @@ const start = async () => {
   const DEFAULT_PORT = process.env.PORT || 4003;
 
   // Start the application
-  server.listen(DEFAULT_PORT, () => {
+  server.listen(DEFAULT_PORT, async () => {
+    // Ensure we run tasks when the application starts
+    await tasks();
     console.info(`Application running on port ${DEFAULT_PORT}.`);
 
     // Schedule the job to run that the top of the hour, every hour
