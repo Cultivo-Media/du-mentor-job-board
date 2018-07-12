@@ -72,7 +72,11 @@ export default class MentorCard extends Component {
         />}
         <StyledMentorCard>
           <h3>{mentor.name}</h3>
-          <span>{mentor.expertise}</span>
+          <p>
+            {mentor.expertise.map((expertise, index, arr) =>
+              <span style={{ textTransform: 'capitalize' }}>{expertise}{index !== (arr.length - 1) && <span>, </span>}</span>)
+            }
+          </p>
           <MentorCardTable>
             <MentorCardTableRow>
               <MentorCardTableRowSub>Company</MentorCardTableRowSub>

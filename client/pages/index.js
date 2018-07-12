@@ -23,13 +23,14 @@ export default class App extends Component {
   componentDidMount() {
     // Get the data from the API using two requests
     axios.all([
-      axios.get('http://localhost:4003/mentors'),
-      axios.get('http://localhost:4003/mentors/expertise'),
+      axios.get('/api/mentors'),
+      axios.get('/api/mentors/expertise'),
     ]).then(axios.spread((mentors, expertiseFields) => {
+      console.log(mentors, expertiseFields);
       this.setState({
-        data: mentors,
-        expertiseFields,
-        mentors,
+        data: mentors.data,
+        expertiseFields: expertiseFields.data,
+        mentors: mentors.data,
         loading: false,
         loaded: true,
       });
@@ -45,7 +46,8 @@ export default class App extends Component {
 
   // A helper function used to filter through members
   filterMentors = (prop, val) => {
-    // If no value was passed for filtering, we want to completely reset the mentors that are filtered
+    // If no value was passed for filtering, we want to completely reset the mentors that are
+    // filtered
     if (!val) {
       return this.setState(state => ({
         mentors: state.data,
@@ -53,7 +55,8 @@ export default class App extends Component {
     }
     // If we are selecting multiple sets of expertise, we need to include all of them
     let mentors;
-    // If we are filtering expertise (the only time we are filtering an array), we need to handle it carefully
+    // If we are filtering expertise (the only time we are filtering an array), we need to handle it
+    // carefully
     if (Array.isArray(val)) {
       // Filter through mentors and split their expertise strings into an array
       mentors = this.state.data.filter(m => val.every(e => m.expertise.includes(e)));
