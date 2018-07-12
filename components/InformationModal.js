@@ -86,11 +86,11 @@ const customStyles = {
  *
  * Quickly allows a property to be mapped to a circular checkbox with the content filled or not
  *
- * @param property
+ * @param {boolean} property - A boolean that determines whether or not the checkbox is selected.
  */
 const MappedCheckbox = ({ property }) => (
-  <StyledCheckbox active={property && property.toLowerCase().indexOf('x') > -1}>
-    {property && property.toLowerCase().indexOf('x') > -1 && <i className="fa fa-check" />}
+  <StyledCheckbox active={property}>
+    {property && <i className="fa fa-check" />}
   </StyledCheckbox>
 );
 
@@ -146,7 +146,7 @@ const InformationModal = ({ informationModalIsOpen, mentor, toggleModal }) => (
               <Col xs={6}>
                 <Box mb={2}>
                   <Flex center>
-                    <MappedCheckbox property={mentor.alumni} />
+                    <MappedCheckbox property={mentor.characteristics.includes('alumni')} />
                     <MentorInfo>Alumni</MentorInfo>
                   </Flex>
                 </Box>
@@ -154,7 +154,7 @@ const InformationModal = ({ informationModalIsOpen, mentor, toggleModal }) => (
               <Col xs={6}>
                 <Box mb={2}>
                   <Flex center>
-                    <MappedCheckbox property={mentor.staff} />
+                    <MappedCheckbox property={mentor.characteristics.includes('staff')} />
                     <MentorInfo>Staff</MentorInfo>
                   </Flex>
                 </Box>
@@ -162,7 +162,7 @@ const InformationModal = ({ informationModalIsOpen, mentor, toggleModal }) => (
               <Col xs={6}>
                 <Box mb={2}>
                   <Flex center>
-                    <MappedCheckbox property={mentor.faculty} />
+                    <MappedCheckbox property={mentor.characteristics.includes('faculty')} />
                     <MentorInfo>Faculty</MentorInfo>
                   </Flex>
                 </Box>
@@ -170,7 +170,7 @@ const InformationModal = ({ informationModalIsOpen, mentor, toggleModal }) => (
               <Col xs={6}>
                 <Box mb={2}>
                   <Flex center>
-                    <MappedCheckbox property={mentor.parent} />
+                    <MappedCheckbox property={mentor.characteristics.includes('parent')} />
                     <MentorInfo>Parent</MentorInfo>
                   </Flex>
                 </Box>
@@ -178,7 +178,7 @@ const InformationModal = ({ informationModalIsOpen, mentor, toggleModal }) => (
               <Col xs={6}>
                 <Box mb={2}>
                   <Flex center>
-                    <MappedCheckbox property={mentor.donor} />
+                    <MappedCheckbox property={mentor.characteristics.includes('donor')} />
                     <MentorInfo>Donor</MentorInfo>
                   </Flex>
                 </Box>
@@ -186,7 +186,7 @@ const InformationModal = ({ informationModalIsOpen, mentor, toggleModal }) => (
               <Col xs={6}>
                 <Box mb={2}>
                   <Flex center>
-                    <MappedCheckbox property={mentor.communityMember} />
+                    <MappedCheckbox property={mentor.characteristics.includes('communityMember')} />
                     <MentorInfo>Community</MentorInfo>
                   </Flex>
                 </Box>
@@ -199,31 +199,31 @@ const InformationModal = ({ informationModalIsOpen, mentor, toggleModal }) => (
             </Box>
             <Box mb={2}>
               <Flex center>
-                <MappedCheckbox property={mentor.earlymorning} />
+                <MappedCheckbox property={mentor.availability.includes('earlyMorning')} />
                 <MentorInfo>Early Morning (8 AM - 10 AM)</MentorInfo>
               </Flex>
             </Box>
             <Box mb={2}>
               <Flex center>
-                <MappedCheckbox property={mentor.latemorning} />
+                <MappedCheckbox property={mentor.availability.includes('lateMorning')} />
                 <MentorInfo>Late Morning (10 AM - 12 PM)</MentorInfo>
               </Flex>
             </Box>
             <Box mb={2}>
               <Flex center>
-                <MappedCheckbox property={mentor.earlyafternoon} />
+                <MappedCheckbox property={mentor.availability.includes('earlyAfternoon')} />
                 <MentorInfo>Early Afternoon (12 PM - 3 PM)</MentorInfo>
               </Flex>
             </Box>
             <Box mb={2}>
               <Flex center>
-                <MappedCheckbox property={mentor.lateafternoon} />
+                <MappedCheckbox property={mentor.availability.includes('lateAfternoon')} />
                 <MentorInfo>Late Afternoon (3 PM - 5 PM)</MentorInfo>
               </Flex>
             </Box>
             <Box mb={2}>
               <Flex center>
-                <MappedCheckbox property={mentor.evening} />
+                <MappedCheckbox property={mentor.availability.includes('evening')} />
                 <MentorInfo>Evening (5 PM - 8 PM)</MentorInfo>
               </Flex>
             </Box>

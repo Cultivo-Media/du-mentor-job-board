@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import GetSheetDone from 'get-sheet-done';
+import axios from 'axios';
 import { Container, Row, Col } from 'react-grid-system';
 import Box from 'react-box-size';
 
@@ -7,8 +7,6 @@ import Navbar from '../components/Navbar';
 import MentorCard from '../components/ui/MentorCard';
 import Header from '../components/Header';
 import { SectionHeader } from '../components/InformationModal';
-
-const documentKey = '1WmIypVMhgUaiwjWtgGXt58eNMtLffWr1xZslRErsGJ0';
 
 export default class App extends Component {
   // Configure basic data regarding the initial state
@@ -23,26 +21,19 @@ export default class App extends Component {
 
   // Load google sheet data
   componentDidMount() {
-    // Get the google sheet
-    GetSheetDone.labeledCols(documentKey).then((sheet) => {
-      // Add the data to the state
-      const arrayOfExpertise = sheet.data.map(d => d.expertise.split(','));
-      // We need to find all unique elements of expertise
-      // This allow us to filter through the array later
-      const flattenedArray = [].concat(...arrayOfExpertise)
-        .map(item => item.trim())
-        .map(item => typeof item === 'string' ? item.toLowerCase() : item);
-      // Flatten the array again, then sort it
-      // Sorting the array allows us to show the elements in alphabetical order
-      const filteredExpertise = Array.from(new Set(flattenedArray)).sort();
+    // Get the data from the API using two requests
+    axios.all([
+      axios.get('http://localhost:4003/mentors'),
+      axios.get('http://localhost:4003/mentors/expertise'),
+    ]).then(axios.spread((mentors, expertiseFields) => {
       this.setState({
-        data: sheet.data,
-        expertiseFields: filteredExpertise,
-        mentors: sheet.data,
+        data: mentors,
+        expertiseFields,
+        mentors,
         loading: false,
         loaded: true,
       });
-    });
+    }));
   }
 
   // When we filter the mentors, we pull the value from the event's target element
@@ -65,11 +56,7 @@ export default class App extends Component {
     // If we are filtering expertise (the only time we are filtering an array), we need to handle it carefully
     if (Array.isArray(val)) {
       // Filter through mentors and split their expertise strings into an array
-      mentors = this.state.data.filter((m) => {
-        const expertise = m.expertise
-          .split(',').map(e => e.trim());
-        return val.every(e => expertise.includes(e));
-      });
+      mentors = this.state.data.filter(m => val.every(e => m.expertise.includes(e)));
     } else {
       // Otherwise, we can just filter and ensure that the property includes itself
       mentors = this.state.data.filter(d => ['name', 'company'].some(a => d[a].toLowerCase().includes(val.toLowerCase())));
