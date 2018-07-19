@@ -2,15 +2,18 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Box from 'react-box-size';
 
-import { colors } from './variables';
+import { Button,
+  Flex,
+  Grow,
+  CardTable,
+  CardTableRow,
+  CardTableRowHead,
+  CardTableRowSub,
+  colors,
+} from 'du-board-design-system';
 
-import Button from './Button';
-import { Flex, Grow } from './Flex';
-
-import MentorCardShape from '../../shapes/MentorCard';
-import InformationModal from '../InformationModal';
-
-import { MentorCardTable, MentorCardTableRow, MentorCardTableRowHead, MentorCardTableRowSub } from './CardTable';
+import MentorCardShape from '../shapes/MentorCard';
+import InformationModal from './InformationModal';
 
 const StyledMentorCard = styled.div`
   background-color: ${colors.white};
@@ -77,18 +80,18 @@ export default class MentorCard extends Component {
               <span style={{ textTransform: 'capitalize' }}>{expertise}{index !== (arr.length - 1) && <span>, </span>}</span>)
             }
           </p>
-          <MentorCardTable>
-            <MentorCardTableRow>
-              <MentorCardTableRowSub>Company</MentorCardTableRowSub>
+          <CardTable>
+            <CardTableRow>
+              <CardTableRowSub>Company</CardTableRowSub>
               <Grow />
-              <MentorCardTableRowHead>{mentor.company}</MentorCardTableRowHead>
-            </MentorCardTableRow>
-            <MentorCardTableRow>
-              <MentorCardTableRowSub>Title</MentorCardTableRowSub>
+              <CardTableRowHead>{mentor.company}</CardTableRowHead>
+            </CardTableRow>
+            <CardTableRow>
+              <CardTableRowSub>Title</CardTableRowSub>
               <Grow />
-              <MentorCardTableRowHead>{mentor.title}</MentorCardTableRowHead>
-            </MentorCardTableRow>
-          </MentorCardTable>
+              <CardTableRowHead>{mentor.title}</CardTableRowHead>
+            </CardTableRow>
+          </CardTable>
           <p>{mentor.bio}</p>
           <Box mt={2}>
             <Flex>
@@ -96,7 +99,7 @@ export default class MentorCard extends Component {
               <Box mr={2}>
                 <Button onClick={this.toggleModal}>Learn More</Button>
               </Box>
-              <Button active onClick={this.toggleModal}>Apply to Meet</Button>
+              <Button primary onClick={this.toggleModal}>Apply to Meet</Button>
             </Flex>
           </Box>
         </StyledMentorCard>

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Container, Row, Col } from 'react-grid-system';
+import { Row, Col } from 'react-grid-system';
 import Box from 'react-box-size';
+import { Container, Header, SectionHeader } from 'du-board-design-system';
 
+import MentorCard from '../components/MentorCard';
 import Navbar from '../components/Navbar';
-import MentorCard from '../components/ui/MentorCard';
-import Header from '../components/Header';
-import { SectionHeader } from '../components/InformationModal';
 
 export default class App extends Component {
   // Configure basic data regarding the initial state

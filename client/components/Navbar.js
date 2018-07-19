@@ -1,43 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Container, Row, Col } from 'react-grid-system';
+import { Container, Navbar, Flex, Grow } from 'du-board-design-system';
+import { Row, Col } from 'react-grid-system';
 import Link from 'next/link';
 
 import NavbarShape from '../shapes/Navbar';
-
-import { colors } from './ui/variables';
-import { Flex, Grow } from './ui/Flex';
-
-const StyledNavbar = styled.div`
-  padding: 40px 0;
-  h4 {
-    color: ${colors.black};
-    font-size: 20px;
-    font-weight: bold;
-  }
-  img {
-    width: 40px;
-  }
-  input {
-    background-color: ${colors.snow};
-    border: none;
-    border-radius: 4px;
-    color: ${colors.black};
-    font-size: 16px;
-    padding: 8px;
-    width: calc(100% - 16px);
-    &:focus {
-      outline: none;
-    }
-  }
-  a {
-    color: ${colors.gray};
-    text-decoration: none;
-    &:hover {
-      color: ${colors.black};
-    }
-  }
-`;
 
 /**
  * Navbar
@@ -47,13 +13,14 @@ const StyledNavbar = styled.div`
  * A navbar that displays to the user on all pages.
  *
  * @param {function} updateSearch - A request to use as the text inside of the search field changes
- * @param {boolean} shouldShowSearchField - A boolean that determines whether or not to show the search.
+ * @param {boolean} shouldShowSearchField - A boolean that determines whether or not to show the
+ *  search.
  *
  * @constructor
  */
-const Navbar = ({ updateSearch, shouldShowSearchField }) => (
+const NavbarContainer = ({ updateSearch, shouldShowSearchField }) => (
   <Container>
-    <StyledNavbar>
+    <Navbar>
       <Row align="center">
         <Col sm={3}>
           <Flex center>
@@ -79,10 +46,15 @@ const Navbar = ({ updateSearch, shouldShowSearchField }) => (
           </Flex>
         </Col>
       </Row>
-    </StyledNavbar>
+    </Navbar>
   </Container>
 );
 
-Navbar.propTypes = NavbarShape;
+NavbarContainer.propTypes = NavbarShape;
 
-export default Navbar;
+NavbarContainer.defaultProps = {
+  updateSearch: () => null,
+  shouldShowSearchField: false,
+};
+
+export default NavbarContainer;
