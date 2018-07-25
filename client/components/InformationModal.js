@@ -145,7 +145,7 @@ const InformationModal = ({ informationModalIsOpen, mentor, toggleModal }) => (
               <Col xs={6}>
                 <Box mb={2}>
                   <Flex center>
-                    <MappedCheckbox active={mentor.characteristics.includes('communityMember')} />
+                    <MappedCheckbox active={mentor.characteristics.includes('community member')} />
                     <DefaultLabel>Community</DefaultLabel>
                   </Flex>
                 </Box>
@@ -158,25 +158,25 @@ const InformationModal = ({ informationModalIsOpen, mentor, toggleModal }) => (
             </Box>
             <Box mb={2}>
               <Flex center>
-                <MappedCheckbox active={mentor.availability.includes('earlyMorning')} />
+                <MappedCheckbox active={mentor.availability.includes('early-morning')} />
                 <DefaultLabel>Early Morning (8 AM - 10 AM)</DefaultLabel>
               </Flex>
             </Box>
             <Box mb={2}>
               <Flex center>
-                <MappedCheckbox active={mentor.availability.includes('lateMorning')} />
+                <MappedCheckbox active={mentor.availability.includes('late-morning')} />
                 <DefaultLabel>Late Morning (10 AM - 12 PM)</DefaultLabel>
               </Flex>
             </Box>
             <Box mb={2}>
               <Flex center>
-                <MappedCheckbox active={mentor.availability.includes('earlyAfternoon')} />
+                <MappedCheckbox active={mentor.availability.includes('early-afternoon')} />
                 <DefaultLabel>Early Afternoon (12 PM - 3 PM)</DefaultLabel>
               </Flex>
             </Box>
             <Box mb={2}>
               <Flex center>
-                <MappedCheckbox active={mentor.availability.includes('lateAfternoon')} />
+                <MappedCheckbox active={mentor.availability.includes('late-afternoon')} />
                 <DefaultLabel>Late Afternoon (3 PM - 5 PM)</DefaultLabel>
               </Flex>
             </Box>
@@ -194,7 +194,9 @@ const InformationModal = ({ informationModalIsOpen, mentor, toggleModal }) => (
         <Flex center>
           <p>You will be redirected to Typeform.</p>
           <Grow />
-          <Button primary>Apply to Meet</Button>
+          <Button primary>
+            Apply To Meet
+          </Button>
         </Flex>
       </Box>
     </StyledInformationModal>

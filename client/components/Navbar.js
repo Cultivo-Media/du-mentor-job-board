@@ -40,9 +40,13 @@ const NavbarContainer = ({ updateSearch, shouldShowSearchField }) => (
               <a href="/about">About</a>
             </Link>
             <Grow />
-            <Link href="/apply">
-              <a href="/apply">Apply to be a mentor</a>
-            </Link>
+            <a
+              href="https://projectxite.typeform.com/to/JrQOzl"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Apply to be a mentor
+            </a>
           </Flex>
         </Col>
       </Row>

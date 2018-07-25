@@ -25,7 +25,6 @@ export default class App extends Component {
       axios.get('/api/mentors'),
       axios.get('/api/mentors/expertise'),
     ]).then(axios.spread((mentors, expertiseFields) => {
-      console.log(mentors, expertiseFields);
       this.setState({
         data: mentors.data,
         expertiseFields: expertiseFields.data,
@@ -110,7 +109,7 @@ export default class App extends Component {
                 <SectionHeader>Expertise</SectionHeader>
               </Box>
               {expertiseFields && expertiseFields.map(e => (
-                <Box mb={2}>
+                <Box mb={2} key={e}>
                   <span
                     onClick={() => this.selectExpertise(e)}
                     style={{
@@ -126,7 +125,7 @@ export default class App extends Component {
             <Col sm={9}>
               <Row>
                 {mentors && mentors.length > 0 && mentors.map(m => (
-                  <Col sm={6}>
+                  <Col sm={6} key={m._id}>
                     <Box mb={4}>
                       <MentorCard mentor={m} />
                     </Box>
