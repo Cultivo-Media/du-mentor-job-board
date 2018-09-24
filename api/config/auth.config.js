@@ -191,18 +191,18 @@ const attachAuthContextMiddleware = async (req, res, next) => {
 };
 
 /**
- * hasOrganizationAccess()
+ * hasMentorAccess()
  *
  * express middleware function
  *
- * Determines whether or not a user has access to read or write to a single organization.
+ * Determines whether or not a user has access to read or write to a single mentor.
  *
  * @param {string} idSource
  * @param {string} idName
  *
  * @returns {boolean} Whether or not the authentication passed.
  */
-const hasOrganizationAccess = () =>
+const hasMentorAccess = () =>
   createAsyncAuthMiddleware(async (req) => {
     // Find a user that has the same ID as the one in the authContext
     const currentUser = await UserModel.findOne({ _id: req.authContext.userId }).exec();
@@ -219,5 +219,5 @@ module.exports = {
   comparePassword,
   generateJwtForUser,
   attachAuthContextMiddleware,
-  hasOrganizationAccess,
+  hasMentorAccess,
 };
