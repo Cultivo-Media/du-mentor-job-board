@@ -1,33 +1,14 @@
 const mongoose = require('mongoose');
 
-/**
- * UserSchema
- *
- * mongoose schema
- *
- * A schema defining how the user should look.
- */
 const UserSchema = new mongoose.Schema({
   /**
-   * name
+   * username
    *
    * string
    *
-   * The name of the user (inherited from the mentor)
+   * The email of the user that has an account that can be used to edit organizations.
    */
-  name: {
-    type: String,
-    required: true,
-  },
-
-  /**
-   * email
-   *
-   * string
-   *
-   * An email that the user has saved to their account.
-   */
-  email: {
+  username: {
     type: String,
     required: true,
   },
@@ -37,28 +18,15 @@ const UserSchema = new mongoose.Schema({
    *
    * string
    *
-   * A string (hash) of their password used to authenticate.
+   * A string representing a hashed version of the password of a user.
    */
   passwordHash: {
     type: String,
     required: true,
   },
-
-  /**
-   * mentor
-   *
-   * ObjectId ref
-   *
-   * A reference to a mentor in which the user has created their account from.
-   */
-  mentor: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Mentor',
-    required: true,
-  },
 });
 
-const UserModel = mongoose.model('User', UserSchema);
+const UserModel = mongoose.model('UserModel', UserSchema);
 
 module.exports = {
   UserSchema,

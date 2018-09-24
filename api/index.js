@@ -6,6 +6,7 @@ const { attachAuthContextMiddleware } = require('./config/auth.config');
 
 // Configure routes
 const mentorRoute = require('./routes/mentor.route');
+const authRoute = require('./routes/auth.route');
 
 const router = new Router();
 
@@ -14,5 +15,6 @@ router.use(attachAuthContextMiddleware);
 
 // Routes
 router.use('/mentors', mentorRoute);
+router.use('/auth', authRoute);
 
 module.exports = router;

@@ -48,7 +48,6 @@ const buildUrl = (id, mode, sheetNum = 1) => `https://spreadsheets.google.com/fe
  */
 const fetchGoogleSheet = async (id) => {
   const queryUrl = buildUrl(id, 'list');
-  console.log(queryUrl);
   const response = await axios.get(queryUrl);
   return response.data;
 };

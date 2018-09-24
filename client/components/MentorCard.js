@@ -77,7 +77,7 @@ export default class MentorCard extends Component {
           <h3>{mentor.name}</h3>
           <p>
             {mentor.expertise.map((expertise, index, arr) =>
-              <span style={{ textTransform: 'capitalize' }}>{expertise}{index !== (arr.length - 1) && <span>, </span>}</span>)
+              <span style={{ textTransform: 'capitalize' }} key={index}>{expertise}{index !== (arr.length - 1) && <span>, </span>}</span>)
             }
           </p>
           <CardTable>

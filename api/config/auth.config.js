@@ -28,7 +28,7 @@ const KEY = 'dummy_key_to_change';
  *
  * A string representing the name of the cookie we request from the auth cookies.
  */
-const TOKEN_COOKIE_NAME = 'mentorJobBoardToken';
+const TOKEN_COOKIE_NAME = 'cultivoMediaInnovationMap';
 
 /**
  * hashPassword()
@@ -191,25 +191,24 @@ const attachAuthContextMiddleware = async (req, res, next) => {
 };
 
 /**
- * hasMentorAccess()
+ * hasOrganizationAccess()
  *
  * express middleware function
  *
- * Determines whether or not a user has access to read or write to a single mentor.
+ * Determines whether or not a user has access to read or write to a single organization.
  *
  * @param {string} idSource
  * @param {string} idName
  *
  * @returns {boolean} Whether or not the authentication passed.
  */
-const hasMentorAccess = (idSource = 'params', idName = '_id') =>
+const hasOrganizationAccess = () =>
   createAsyncAuthMiddleware(async (req) => {
     // Find a user that has the same ID as the one in the authContext
-    const currentUser = await UserModel.findOne({ _id: req.authContext.userId }).select('mentor').exec();
+    const currentUser = await UserModel.findOne({ _id: req.authContext.userId }).exec();
 
-    // If the current user has a mentor that matches the idSource and idName,then they are
-    // authenticated
-    if (currentUser.mentor.toString() === req[idSource][idName]) return true;
+    // If the user exists (very basic, low-level auth) then they can access this
+    if (currentUser && currentUser.email) return true;
 
     // Otherwise, return false immediately
     return false;
@@ -220,4 +219,5 @@ module.exports = {
   comparePassword,
   generateJwtForUser,
   attachAuthContextMiddleware,
+  hasOrganizationAccess,
 };
