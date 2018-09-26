@@ -23,7 +23,6 @@ export default class App extends Component {
     super(props);
     this.state = {
       selectedExpertise: [],
-      data: this.props.mentors,
       mentors: this.props.mentors,
       expertiseFields: this.props.expertise,
     };
@@ -41,9 +40,9 @@ export default class App extends Component {
     // If no value was passed for filtering, we want to completely reset the mentors that are
     // filtered
     if (!val) {
-      return this.setState(state => ({
-        mentors: state.data,
-      }));
+      return this.setState({
+        mentors: this.props.mentors,
+      });
     }
     // If we are selecting multiple sets of expertise, we need to include all of them
     let mentors;
@@ -51,10 +50,10 @@ export default class App extends Component {
     // carefully
     if (Array.isArray(val)) {
       // Filter through mentors and split their expertise strings into an array
-      mentors = this.state.data.filter(m => val.every(e => m.expertise.includes(e)));
+      mentors = this.props.mentors.filter(m => val.every(e => m.expertise.includes(e)));
     } else {
       // Otherwise, we can just filter and ensure that the property includes itself
-      mentors = this.state.data.filter(d => ['name', 'company'].some(a => d[a].toLowerCase().includes(val.toLowerCase())));
+      mentors = this.props.mentors.filter(d => ['name', 'company'].some(a => d[a].toLowerCase().includes(val.toLowerCase())));
     }
     // Return with a new array of the setState data
     return this.setState({
@@ -91,7 +90,7 @@ export default class App extends Component {
         <Navbar updateSearch={this.updateSearch} shouldShowSearchField />
         <Header
           title="Find a mentor for you"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at lorem auctor enim elementum tempor."
+          description="Connecting Students with Denver’s Brightest Minds."
         />
         {loading && <Container>Loading...</Container>}
         {!loading && mentors &&
@@ -117,7 +116,7 @@ export default class App extends Component {
             </Col>
             <Col sm={9}>
               <Row>
-                {mentors.length > 0 && mentors.map(m => (
+                {mentors && mentors.map(m => (
                   <Col sm={6} key={m._id}>
                     <Box mb={4}>
                       <MentorCard mentor={m} />

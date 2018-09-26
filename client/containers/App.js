@@ -7,9 +7,15 @@ import AppComponent from '../components/App';
 
 class App extends Component {
   static propTypes = {
-    mentor: PropTypes.object.isRequired,
+    mentors: PropTypes.array,
+    expertise: PropTypes.array,
+    loading: PropTypes.bool,
     fetchMentors: PropTypes.func.isRequired,
     fetchMentorExpertise: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    loading: false,
   }
 
   componentDidMount = () => {
@@ -17,17 +23,26 @@ class App extends Component {
     this.props.fetchMentorExpertise();
   }
 
-  render = () => (
-    <AppComponent
-      mentors={this.props.mentor.mentors}
-      expertise={this.props.mentor.expertise}
-      loading={this.props.mentor.loading}
-    />
-  )
+  render = () => {
+    const { mentors, expertise, loading } = this.props;
+    if (mentors.length > 0 && expertise.length > 0) {
+      return (
+        <AppComponent
+          mentors={mentors}
+          expertise={expertise}
+          loading={loading}
+        />
+      );
+    }
+
+    return <p>Loading...</p>;
+  }
 }
 
-const mapStateToProps = ({ mentor }) => ({
-  mentor,
+const mapStateToProps = ({ mentor: { mentors, expertise, loading } }) => ({
+  mentors,
+  expertise,
+  loading,
 });
 
 const mapDispatchToProps = {
