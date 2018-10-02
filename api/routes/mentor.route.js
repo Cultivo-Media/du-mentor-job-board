@@ -14,7 +14,14 @@ const router = new Router();
  * Gets all mentors (no auth because we do not care who makes a request for all mentors)
  */
 router.get('/', async (req, res) => {
-  const mentors = await MentorModel.find({});
+  const m = await MentorModel.find({}).exec();
+
+  // Sort mentors by their first name
+  const mentors = m.sort((a, b) => {
+    if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+    if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+    return 0;
+  });
 
   return res.send(mentors);
 });
