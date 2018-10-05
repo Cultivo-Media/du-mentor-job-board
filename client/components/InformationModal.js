@@ -102,90 +102,101 @@ const InformationModal = ({ informationModalIsOpen, mentor, toggleModal }) => (
               <SectionHeader>du affiliation</SectionHeader>
             </Box>
             <Row>
+              {mentor.characteristics.includes('alumni') &&
               <Col xs={6}>
                 <Box mb={2}>
                   <Flex center>
-                    <MappedCheckbox active={mentor.characteristics.includes('alumni')} />
+                    <MappedCheckbox active />
                     <DefaultLabel>Alumni</DefaultLabel>
                   </Flex>
                 </Box>
-              </Col>
+              </Col>}
+              {mentor.characteristics.includes('staff') &&
               <Col xs={6}>
                 <Box mb={2}>
                   <Flex center>
-                    <MappedCheckbox active={mentor.characteristics.includes('staff')} />
+                    <MappedCheckbox active />
                     <DefaultLabel>Staff</DefaultLabel>
                   </Flex>
                 </Box>
-              </Col>
+              </Col>}
+              {mentor.characteristics.includes('faculty') &&
               <Col xs={6}>
                 <Box mb={2}>
                   <Flex center>
-                    <MappedCheckbox active={mentor.characteristics.includes('faculty')} />
+                    <MappedCheckbox active />
                     <DefaultLabel>Faculty</DefaultLabel>
                   </Flex>
                 </Box>
-              </Col>
+              </Col>}
+              {mentor.characteristics.includes('parent') &&
               <Col xs={6}>
                 <Box mb={2}>
                   <Flex center>
-                    <MappedCheckbox active={mentor.characteristics.includes('parent')} />
+                    <MappedCheckbox active />
                     <DefaultLabel>Parent</DefaultLabel>
                   </Flex>
                 </Box>
-              </Col>
+              </Col>}
+              {mentor.characteristics.includes('donor') &&
               <Col xs={6}>
                 <Box mb={2}>
                   <Flex center>
-                    <MappedCheckbox active={mentor.characteristics.includes('donor')} />
+                    <MappedCheckbox active />
                     <DefaultLabel>Donor</DefaultLabel>
                   </Flex>
                 </Box>
-              </Col>
+              </Col>}
+              {mentor.characteristics.includes('community-member') &&
               <Col xs={6}>
                 <Box mb={2}>
                   <Flex center>
-                    <MappedCheckbox active={mentor.characteristics.includes('community member')} />
+                    <MappedCheckbox active />
                     <DefaultLabel>Community</DefaultLabel>
                   </Flex>
                 </Box>
-              </Col>
+              </Col>}
             </Row>
           </Col>
           <Col md={6}>
             <Box mb={2}>
               <SectionHeader>availability</SectionHeader>
             </Box>
+            {mentor.availability.includes('early-morning') &&
             <Box mb={2}>
               <Flex center>
                 <MappedCheckbox active={mentor.availability.includes('early-morning')} />
                 <DefaultLabel>Early Morning (8 AM - 10 AM)</DefaultLabel>
               </Flex>
-            </Box>
+            </Box>}
+            {mentor.availability.includes('late-morning') &&
             <Box mb={2}>
               <Flex center>
                 <MappedCheckbox active={mentor.availability.includes('late-morning')} />
                 <DefaultLabel>Late Morning (10 AM - 12 PM)</DefaultLabel>
               </Flex>
-            </Box>
+            </Box>}
+            {mentor.availability.includes('early-afternoon') &&
             <Box mb={2}>
               <Flex center>
                 <MappedCheckbox active={mentor.availability.includes('early-afternoon')} />
                 <DefaultLabel>Early Afternoon (12 PM - 3 PM)</DefaultLabel>
               </Flex>
-            </Box>
+            </Box>}
+            {mentor.availability.includes('late-afternoon') &&
             <Box mb={2}>
               <Flex center>
                 <MappedCheckbox active={mentor.availability.includes('late-afternoon')} />
                 <DefaultLabel>Late Afternoon (3 PM - 5 PM)</DefaultLabel>
               </Flex>
-            </Box>
+            </Box>}
+            {mentor.availability.includes('evening') &&
             <Box mb={2}>
               <Flex center>
                 <MappedCheckbox active={mentor.availability.includes('evening')} />
                 <DefaultLabel>Evening (5 PM - 8 PM)</DefaultLabel>
               </Flex>
-            </Box>
+            </Box>}
           </Col>
         </Row>
         <Box mt={3} mb={3}>

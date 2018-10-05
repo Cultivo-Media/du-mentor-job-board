@@ -23,11 +23,15 @@ const NavbarContainer = ({ updateSearch, shouldShowSearchField }) => (
     <Navbar>
       <Row align="center">
         <Col sm={3}>
-          <Flex center>
-            <img src="/static/logo.png" alt="project x-ite logo" />
-            &nbsp;&nbsp;
-            <h4>mentor</h4>
-          </Flex>
+          <Link href="/">
+            <a href="/">
+              <Flex center>
+                <img src="/static/logo.png" alt="project x-ite logo" />
+                &nbsp;&nbsp;
+                <h4>mentor</h4>
+              </Flex>
+            </a>
+          </Link>
         </Col>
         {shouldShowSearchField &&
         <Col sm={3}>

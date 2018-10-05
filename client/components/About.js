@@ -8,6 +8,7 @@ export default () => (
   <div>
     <Navbar />
     <Header
+      backgroundColor="#0d97d4"
       title="Find a mentor for you"
       description="Connecting Students with Denver’s Brightest Minds."
     />

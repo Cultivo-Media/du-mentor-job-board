@@ -70,7 +70,13 @@ router.get('/expertise', async (req, res) => {
     // Merge arrays together
     .reduce((a, b) => a.concat(b), [])
     // Ensure that each one is a non-empty string
-    .filter(String);
+    .filter(String)
+    // Sort them all alphabetically
+    .sort((a, b) => {
+      if (a.toLowerCase() < b.toLowerCase()) return -1;
+      if (a.toLowerCase() > b.toLowerCase()) return 1;
+      return 0;
+    });
   // Ensure there are no duplicates by creating a set then creating an array
   const uniqueExpertise = [...new Set(mergedExpertise)];
   // Return with the result
