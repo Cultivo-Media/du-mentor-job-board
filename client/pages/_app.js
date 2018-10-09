@@ -1,5 +1,6 @@
 import React from 'react';
 import App, { Container } from 'next/app';
+import Head from 'next/head';
 import { Provider } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -60,6 +61,9 @@ class AppWrapper extends App {
     const { Component, pageProps, reduxStore } = this.props;
     return (
       <Container>
+        <Head>
+          <title>DU Mentor Job Board</title>
+        </Head>
         <Provider store={reduxStore}>
           <Component {...pageProps} />
         </Provider>

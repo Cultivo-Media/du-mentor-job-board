@@ -30,7 +30,6 @@ export default class MyDocument extends Document {
             }`}
           </style>
           {this.props.styleTags}
-          <title>DU Mentor Job Board</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link href="https://rsms.me/inter/inter-ui.css" rel="stylesheet" />
         </Head>
