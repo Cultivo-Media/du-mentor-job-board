@@ -66,7 +66,7 @@ router.get('/expertise', async (req, res) => {
   // Merge the arrays together
   const mergedExpertise = unfilteredExpertise
     // Move to just an array of arrays
-    .map(m => m.expertise.map(e => e.trim().toLowerCase()))
+    .map(m => m.expertise.map(e => e.trim()))
     // Merge arrays together
     .reduce((a, b) => a.concat(b), [])
     // Ensure that each one is a non-empty string
