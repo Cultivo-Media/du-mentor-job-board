@@ -99,7 +99,16 @@ export default class MentorCard extends Component {
               <Box mr={2}>
                 <Button onClick={this.toggleModal}>Learn More</Button>
               </Box>
-              <Button primary onClick={this.toggleModal}>Apply to Meet</Button>
+              <a
+                style={{ color: '#fff', textDecoration: 'none' }}
+                href="https://projectxite.typeform.com/to/mrMaQ5"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button primary>
+                  Apply To Meet
+                </Button>
+              </a>
             </Flex>
           </Box>
         </StyledMentorCard>

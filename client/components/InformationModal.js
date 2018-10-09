@@ -205,9 +205,16 @@ const InformationModal = ({ informationModalIsOpen, mentor, toggleModal }) => (
         <Flex center>
           <p>You will be redirected to Typeform.</p>
           <Grow />
-          <Button primary>
-            Apply To Meet
-          </Button>
+          <a
+            style={{ color: '#fff', textDecoration: 'none' }}
+            href="https://projectxite.typeform.com/to/mrMaQ5"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button primary>
+              Apply To Meet
+            </Button>
+          </a>
         </Flex>
       </Box>
     </StyledInformationModal>
