@@ -7,6 +7,8 @@ import { Container, Header, SectionHeader } from 'du-board-design-system';
 import MentorCard from '../components/MentorCard';
 import Navbar from '../components/Navbar';
 
+import { merge } from '../util/merge';
+
 export default class App extends Component {
   static propTypes = {
     mentors: PropTypes.array.isRequired,
@@ -53,7 +55,17 @@ export default class App extends Component {
       mentors = this.props.mentors.filter(m => val.every(e => m.expertise.includes(e)));
     } else {
       // Otherwise, we can just filter and ensure that the property includes itself
-      mentors = this.props.mentors.filter(d => ['name', 'company'].some(a => d[a].toLowerCase().includes(val.toLowerCase())));
+      const mentorsFilteredByName = this.props.mentors.filter(m =>
+        // If the lowercase name has the letters of the value
+        m.name.toLowerCase().includes(val.toLowerCase()));
+      const mentorsFilteredByCompany = this.props.mentors.filter(m =>
+        // If the lowercase company has the letters of the value
+        m.company.toLowerCase().includes(val.toLowerCase()));
+      const mentorsFilteredByExpertise = this.props.mentors.filter(m =>
+        // Map the expertise to a lowercase array and then check of some of the values match the val
+        m.expertise.map(e => e.toLowerCase()).some(e => e.includes(val.toLowerCase())));
+      // Merge all the mentors filtered by name, filtered by company, and filtered by expertise
+      mentors = merge(mentorsFilteredByName, merge(mentorsFilteredByCompany, mentorsFilteredByExpertise, '_id'), '_id');
     }
     // Return with a new array of the setState data
     return this.setState({
@@ -108,6 +120,7 @@ export default class App extends Component {
                     style={{
                       cursor: 'pointer',
                       fontWeight: selectedExpertise.includes(e) ? '700' : '400',
+                      color: selectedExpertise.includes(e) ? '#FC6230' : '#555',
                       textTransform: 'capitalize',
                     }}
                   >{e}
