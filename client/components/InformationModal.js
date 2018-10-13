@@ -6,7 +6,6 @@ import { Col, Row } from 'react-grid-system';
 import { Button,
   Flex,
   Grow,
-  colors,
   CardTable,
   CardTableRow,
   CardTableRowHead,
@@ -17,6 +16,8 @@ import { Button,
 } from 'du-board-design-system';
 
 import InformationModalShape from '../shapes/InformationModal';
+
+import colors from './ui/variables';
 
 // Configure styles that show for the entire modal
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(0,0,0,.5)';
@@ -206,7 +207,7 @@ const InformationModal = ({ informationModalIsOpen, mentor, toggleModal }) => (
           <p>You will be redirected to Typeform.</p>
           <Grow />
           <a
-            style={{ color: '#fff', textDecoration: 'none' }}
+            style={{ color: colors.white, textDecoration: 'none' }}
             href="https://projectxite.typeform.com/to/mrMaQ5"
             target="_blank"
             rel="noopener noreferrer"

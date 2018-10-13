@@ -9,11 +9,12 @@ import { Button,
   CardTableRow,
   CardTableRowHead,
   CardTableRowSub,
-  colors,
 } from 'du-board-design-system';
 
 import MentorCardShape from '../shapes/MentorCard';
 import InformationModal from './InformationModal';
+
+import colors from './ui/variables';
 
 const StyledMentorCard = styled.div`
   background-color: ${colors.white};

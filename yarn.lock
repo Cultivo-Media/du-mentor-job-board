@@ -2052,7 +2052,7 @@ dotenv@6.0.0:
 
 "du-board-design-system@git+ssh://git@github.com:hcjk/du-board-design-system.git":
   version "0.1.2"
-  resolved "git+ssh://git@github.com:hcjk/du-board-design-system.git#6cee29b2c11a3a35b00220795d3b0266a0c9c7ca"
+  resolved "git+ssh://git@github.com:hcjk/du-board-design-system.git#a7bcbc448b4d91af96da7fef02614371087db7d5"
   dependencies:
     babel-core "^6.26.3"
     prop-types "15.6.2"

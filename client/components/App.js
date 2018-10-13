@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-grid-system';
 import Box from 'react-box-size';
 import { Container, Header, SectionHeader } from 'du-board-design-system';
+import colors from './ui/variables';
 
 import MentorCard from '../components/MentorCard';
 import Navbar from '../components/Navbar';
 
-import { merge } from '../util/merge';
+import merge from '../util/merge';
 
 export default class App extends Component {
   static propTypes = {
@@ -101,7 +102,7 @@ export default class App extends Component {
       <div>
         <Navbar updateSearch={this.updateSearch} shouldShowSearchField />
         <Header
-          backgroundColor="#33A0D7"
+          backgroundColor={colors.blue}
           title="Find a mentor for you"
           description="Connecting Students with Denver’s Brightest Minds."
         />
@@ -120,7 +121,7 @@ export default class App extends Component {
                     style={{
                       cursor: 'pointer',
                       fontWeight: selectedExpertise.includes(e) ? '700' : '400',
-                      color: selectedExpertise.includes(e) ? '#FC6230' : '#555',
+                      color: selectedExpertise.includes(e) ? colors.orange : colors.darkGray,
                       textTransform: 'capitalize',
                     }}
                   >{e}
